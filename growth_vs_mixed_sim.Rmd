@@ -251,7 +251,7 @@ vs. Bayesian mixed
 
 # Code
 
-[link](https://github.com/mclark--/Miscellaneous-R-Code/tree/master/SC%20and%20TR/mixedModels/growthCurvevsMixedModel.R)
+[link](https://github.com/m-clark/mixed-models-growth-curves-simulation/blob/master/growthCurvevsMixedModel.R) (Still quite messy)
 
 ## lavaan optimization settings
 
