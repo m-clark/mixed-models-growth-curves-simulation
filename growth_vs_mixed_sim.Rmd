@@ -124,7 +124,7 @@ randomEffectsCor_ML %>%
 
 # Estimation issues
 
-With the smaller sample sizes we run into numerous issues in estimation.  In typical SEM settings this may result in negative variance estimates or other problems (so-called Heywood cases).  With mixed models, estimation of a perfect correlation of random intercepts and slopes might similarly call for further diagnostic inspection[^bolker].  In addition, we know mixed models with maximum likelihood will produce biased variance estimates when with small samples. As such, most mixed models packages will default to restricted maximum likelihood (REML) which serves to counter this bias.
+With the smaller sample sizes we run into numerous issues in estimation.  In typical SEM settings this may result in negative variance estimates or other problems (so-called Heywood cases).  With mixed models, estimation of a perfect correlation of random intercepts and slopes might similarly call for further diagnostic inspection[^bolker].  In addition, we know mixed models with maximum likelihood will produce biased variance estimates with small samples. As such, most mixed model packages will default to restricted maximum likelihood (REML) which serves to counter this.
 
 I've defined 'failure' as any run that resulted in a `NaN` for <span class="pack">lavaan</span>, or a perfect positive/negative correlation for <span class="pack">nlme</span>, i.e., where the correlation equaled 1.0 with no rounding. The following shows the proportion of such failures, which are quite dramatic for the growth curve approach. We also see REML performs better than ML for the mixed model approach.
 
