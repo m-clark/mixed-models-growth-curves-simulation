@@ -17,7 +17,7 @@ knitr::opts_chunk$set(echo = F, message=F, R.options=list(width=120), comment=NA
 
 # Intro
 
-Latent growth curve models (LGC) and mixed models, are two popular ways to analyze longitudinal data, such as taking repeated measuremnts for individuals. They can provide equivalent results, though default settings would usually have some slight difference in the model. I specifically wanted to compare them for settings with low(ish) numbers of clusters, essentially to see how and when they begin to fail.  As an example, having 50 individuals measured at 4 time points each wouldn't cause many to think twice in the mixed model setting, while running a structural equation model with 50 individuals has never been recommended. However, growth curve models are a notably constrained type of SEM, as many parameters are fixed, which helps matters, but I wanted to investigate this further. 
+Latent growth curve models (LGC) and mixed models, are two popular ways to analyze longitudinal data, such as taking repeated measurements for individuals. They can provide equivalent results, though default settings would usually have some slight difference in the model. I specifically wanted to compare them for settings with low(ish) numbers of clusters, essentially to see how and when they begin to fail.  As an example, having 50 individuals measured at 4 time points each wouldn't cause many to think twice in the mixed model setting, while running a structural equation model with 50 individuals has never been recommended. However, growth curve models are a notably constrained type of SEM, as many parameters are fixed, which helps matters, but I wanted to investigate this further. 
 
 # Setup
 
@@ -53,7 +53,7 @@ Nothing worrisome here as expected.
 biasFE_ML %>% 
   select(nClusters, nWithinCluster, corRE, biasLGC_Int, biasMM_Int, biasLGC_Time, biasMM_Time) %>% 
   round(3) %>% 
-  datatable(rownames=F, options=list(dom='t', pageLength=45, width=250))
+  datatable(rownames=F, options=list(dom='tp', pageLength=15, width=250))
 ```
 
 
@@ -65,7 +65,7 @@ Both underestimate random effects variance at these settings, and more so with s
 biasRE_ML %>% 
   select(nClusters, nWithinCluster, corRE, biasLGC_Int, biasMM_Int, biasLGC_Time, biasMM_Time) %>% 
   round(3) %>%
-  datatable(rownames=F, options=list(dom='t', pageLength=45))
+  datatable(rownames=F, options=list(dom='tp', pageLength=15))
 ```
 
 
@@ -77,7 +77,7 @@ With few time points (5, 10) and/or smaller number of clusters (10, 25), both ge
 biasREcor_ML %>% 
   select(nClusters, nWithinCluster, corRE, biasLGC_corRE, biasMM_corRE) %>% 
   round(3) %>%  
-  datatable(rownames=F, options=list(dom='t', pageLength=45))
+  datatable(rownames=F, options=list(dom='tp', pageLength=15))
 ```
 
 
@@ -94,7 +94,7 @@ fixedEffects_ML %>%
   select(nClusters, nWithinCluster, corRE, widthGrowth_Int, widthMixed_Int, widthGrowth_Time,
                         widthMixed_Time, mixedWidthMinusgrowthWidth_Int, mixedWidthMinusgrowthWidth_Time) %>% 
   round(3) %>%  
-  datatable(rownames=F, options=list(dom='t', pageLength=45))
+  datatable(rownames=F, options=list(dom='tp', pageLength=15, scrollX='100%'))
 ```
 
 ### Random effect variance
@@ -106,7 +106,7 @@ randomEffects_ML %>%
   select(nClusters, nWithinCluster, corRE, widthGrowth_Int, widthMixed_Int, widthGrowth_Time,
                          widthMixed_Time, mixedWidthMinusgrowthWidth_Int, mixedWidthMinusgrowthWidth_Time) %>% 
   round(3) %>% 
-  datatable(rownames=F, options=list(dom='t', pageLength=45)) # does not respect width in any fashion it would appear
+  datatable(rownames=F, options=list(dom='tp', pageLength=15, scrollX='100%')) # does not respect width in any fashion it would appear
 
 ```
 
@@ -119,7 +119,7 @@ The actual interval estimates for LGC were not confined to [-1,1], and both stru
 randomEffectsCor_ML %>% 
   select(nClusters, nWithinCluster, corRE, widthGrowth, widthMixed, mixedWidthMinusgrowthWidth) %>% 
   round(3) %>% 
-  datatable(rownames=F, options=list(dom='t', pageLength=45))
+  datatable(rownames=F, options=list(dom='tp', pageLength=15, scrollX='100%'))
 ```
 
 # Estimation issues
@@ -135,7 +135,7 @@ data.frame(grid,
            mixedREMLFailures = sapply(mixedREMLFailures, function(x) mean(c(x)))) %>% 
   arrange(desc(growthFailures)) %>% 
   round(3) %>% 
-  datatable(rownames=F, options=list(dom='t', pageLength=45))
+  datatable(rownames=F, options=list(dom='tp', pageLength=15))
 ```
 
 
@@ -155,7 +155,7 @@ Nothing to see here.
 biasFE_REML_clean %>% 
   select(nClusters, nWithinCluster, corRE, biasLGC_Int, biasMM_Int, biasLGC_Time, biasMM_Time) %>% 
   round(3) %>% 
-  datatable(rownames=F, options=list(dom='t', pageLength=45))
+  datatable(rownames=F, options=list(dom='tp', pageLength=15))
 ```
 
 
@@ -167,7 +167,7 @@ At the lowest sample/cluster sizes, LGC underestimates random effects variance a
 biasRE_REML_clean %>% 
   select(nClusters, nWithinCluster, corRE, biasLGC_Int, biasMM_Int, biasLGC_Time, biasMM_Time) %>% 
   round(3) %>%  
-  datatable(rownames=F, options=list(dom='t', pageLength=45))
+  datatable(rownames=F, options=list(dom='tp', pageLength=15))
 ```
 
 
@@ -179,7 +179,7 @@ REML struggles with the RE correlation in the case of fewest time points. LGC st
 biasREcor_REML_clean %>% 
   select(nClusters, nWithinCluster, corRE, biasLGC_corRE, biasMM_corRE) %>% 
   round(3) %>%  
-  datatable(rownames=F, options=list(dom='t', pageLength=45))
+  datatable(rownames=F, options=list(dom='tp', pageLength=15))
 ```
 
 
@@ -196,7 +196,7 @@ fixedEffects_REML_clean %>%
   select(nClusters, nWithinCluster, corRE, widthGrowth_Int, widthMixed_Int, widthGrowth_Time,
                         widthMixed_Time, mixedWidthMinusgrowthWidth_Int, mixedWidthMinusgrowthWidth_Time) %>% 
   round(3) %>%  
-  datatable(rownames=F, options=list(dom='t', pageLength=45))
+  datatable(rownames=F, options=list(dom='t', pageLength=15, scrollX='100%'))
 ```
 
 
@@ -209,7 +209,7 @@ randomEffects_REML_clean %>%
   select(nClusters, nWithinCluster, corRE, widthGrowth_Int, widthMixed_Int, widthGrowth_Time,
                          widthMixed_Time, mixedWidthMinusgrowthWidth_Int, mixedWidthMinusgrowthWidth_Time) %>% 
   round(3) %>% 
-  datatable(rownames=F, options=list(dom='t', pageLength=45)) # does not respect width in any fashion it would appear
+  datatable(rownames=F, options=list(dom='t', pageLength=15, scrollX='100%')) # does not respect width in any fashion it would appear
 ```
 
 
@@ -219,7 +219,7 @@ randomEffects_REML_clean %>%
 randomEffectsCor_REML_clean %>% 
   select(nClusters, nWithinCluster, corRE, widthGrowth, widthMixed, mixedWidthMinusgrowthWidth) %>% 
   round(3) %>% 
-  datatable(rownames=F, options=list(dom='t', pageLength=45))
+  datatable(rownames=F, options=list(dom='t', pageLength=15, scrollX='100%'))
 ```
 
 
@@ -233,20 +233,23 @@ Despite the similarities of the two approaches, they *are* different models howe
 
 However, there are still a few things against using LGC in my opinion, when both are viable or easily implemented. 
 
-- LGC *requires* balanced data, and so one must estimate missing values as a default, or else risk losing a lot of data even with only minor missingness, and doing so can make postestimation procedures problematic depending on the imputation technique chosen. 
+- LGC *requires* balanced data, and so one must estimate missing values as a default, or else risk losing a lot of data even with only minor missingness, and doing so can make post-estimation procedures problematic depending on the imputation technique chosen. 
 - LGC also requires four time points[^tp], but as the above demonstrates, success is not guaranteed with 5 time points even with 50 clusters. 
-- As we have seen, LGC is not very viable for small samples. On the other hand, one could run a repeated measures anova, a special case of the mixed model, on two time points and a handful of subjects without issue.
-- Due to the differences in models, adding covariates to an LGC is tedious and causes the number of estimated parameters to balloon quickly relative to the mixed model, but not necessarily with any interpretability gain.
+- As we have seen, LGC is not very viable for very small samples. On the other hand, one could run a repeated measures anova, a special case of the mixed model, on two time points and a handful of subjects without issue.
+- Due to the differences in models, adding time-varying covariates to an LGC is tedious and causes the number of estimated parameters to balloon quickly relative to the mixed model, which adds to the amount of data you'd want to have.  In practice, LGC users often leave out covariates due to the inherent complexities incurred with their addition to the model.
 - These days, growth mixture models, mediation, multiple outcomes etc. can potentially be done with mixed models with little extra effort beyond the standard mixed model, and do not require an SEM approach.
-- Mixed models are not restricted to time-based clustering[^multilvelsem]
-- There are better (in my opinion) approaches to nonlinear effects, regularization, and other complexities in the non-SEM setting
+- Mixed models are not restricted to time-based clustering[^multilvelsem].
+- There are better (in my opinion) approaches to nonlinear effects, regularization, and other complexities in the non-SEM setting.
 
-In general, LGC should probably be reserved for models with latent variables (beyond the intercept and slope factors) and indirect effects.  In such cases, the data requirements will be even more taxing.  If a mixed model approach is appropriate, it should probably be preferred, and more so with smaller sample size settings.
+In general, LGC should probably be reserved for models that include additional latent variables (beyond the intercept and slope factors) and indirect effects.  In such cases, the data requirements will be even more taxing, but the LGC could be the right tool for the job.  If a mixed model approach is appropriate, it should probably be preferred, and especially so with smaller sample sizes.
 
 # Future
 
-vs. Bayesian mixed
+Possibilities for the future:
 
+vs. Bayesian mixed
+vs. Bayesian growth
+vs. gam with cor=0
 
 
 
