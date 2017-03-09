@@ -36,7 +36,7 @@ Growth curve models were estimated with the R package <span class="pack">lavaan<
 The initial set of results compares the Latent Growth Curve and mixed model, both estimated via maximum likelihood. First, bias in parameter estimates is noted, then interval widths compared. Note that this takes all results as they are, even if there were potential problems in the estimation process.  We will look at 'clean' results later.
 
 
-## Parameter estimates
+## Parameter estimates {.tabset}
 
 Bias here refers to the difference in the mean estimated parameter value vs. the true.
 
@@ -81,7 +81,7 @@ biasREcor_ML %>%
 ```
 
 
-## Interval width
+## Interval width {.tabset}
 
 95% confidence intervals were taken as the .025 and .975 quantiles of the simulation estimates.
 
@@ -145,7 +145,7 @@ data.frame(grid,
 Given the estimation issues, here are results for situations in which those did not exist. This perhaps puts the estimation approaches on unequal footing since the criterion is different, but it still may be informative.  In addition, I've chosen the REML estimates for mixed model results.  However, the differences become negligible with more observations, as we have already seen and would expect from the outset.
 
 
-## Parameter estimates
+## Parameter estimates {.tabset}
 
 ### Fixed effects
 
@@ -183,7 +183,7 @@ biasREcor_REML_clean %>%
 ```
 
 
-## Interval width
+## Interval width {.tabset}
 
 As before, 95% confidence intervals were taken as the quantiles of the simulation estimates. 
 
@@ -200,7 +200,7 @@ fixedEffects_REML_clean %>%
 ```
 
 
-### Random effect variance
+### Random effect variance 
 
 We now see that the width seen in LGC were due to the problematic situations.
 
